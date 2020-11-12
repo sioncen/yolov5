@@ -62,6 +62,8 @@ def detect(save_img=False):
     t0 = time.time()
     img = torch.zeros((1, 3, imgsz, imgsz), device=device)  # init img
     _ = model(img.half() if half else img) if device.type != 'cpu' else None  # run once
+    rightdis=0
+    wrongdis=0
     for path, img, im0s, vid_cap in dataset:
         img = torch.from_numpy(img).to(device)
         img = img.half() if half else img.float()  # uint8 to fp16/32
@@ -88,6 +90,9 @@ def detect(save_img=False):
             else:
                 p, s, im0 = Path(path), '', im0s
 
+            nPos=p.name.find('_')
+            strclass=p.name[:nPos].lower()
+            strdis=''
             save_path = str(save_dir / p.name)
             txt_path = str(save_dir / 'labels' / p.stem) + ('_%g' % dataset.frame if dataset.mode == 'video' else '')
             s += '%gx%g ' % img.shape[2:]  # print string
@@ -100,6 +105,7 @@ def detect(save_img=False):
                 for c in det[:, -1].unique():
                     n = (det[:, -1] == c).sum()  # detections per class
                     s += '%g %ss, ' % (n, names[int(c)])  # add to string
+                    strdis=names[int(c)]
 
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
@@ -112,9 +118,18 @@ def detect(save_img=False):
                     if save_img or view_img:  # Add bbox to image
                         label = '%s %.2f' % (names[int(cls)], conf)
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
+                    # x,y=im0.shape[:2]
+                    # #w,h=im0.shape[2:]
+                    # cv2.putText(im0, label, (128, 128), 0, 1, [225, 255, 255], 5, 0)
 
             # Print time (inference + NMS)
             print('%sDone. (%.3fs)' % (s, t2 - t1))
+            if strclass==strdis:
+              rightdis += 1
+              print(" 111")
+            else:
+              wrongdis += 1
+              print(" 222")
 
             # Stream results
             if view_img:
@@ -143,6 +158,7 @@ def detect(save_img=False):
         print('Results saved to %s' % save_dir)
 
     print('Done. (%.3fs)' % (time.time() - t0))
+    print('Right:{},Wrong:{}'.format(rightdis,wrongdis))
 
 
 if __name__ == '__main__':
