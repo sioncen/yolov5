@@ -8,6 +8,7 @@ import re
 import shutil
 import subprocess
 import time
+import random
 from contextlib import contextmanager
 from copy import copy
 from pathlib import Path
@@ -609,7 +610,7 @@ def non_max_suppression(prediction, conf_thres=0.1, iou_thres=0.6, merge=False, 
 
     # Settings
     min_wh, max_wh = 2, 4096  # (pixels) minimum and maximum box width and height
-    max_det = 300  # maximum number of detections per image
+    max_det = 1  # maximum number of detections per image
     time_limit = 10.0  # seconds to quit after
     redundant = True  # require redundant detections
     multi_label = nc > 1  # multiple labels per box (adds 0.5ms/img)
@@ -1003,7 +1004,7 @@ def plot_one_box(x, img, color=None, label=None, line_thickness=None):
         t_size = cv2.getTextSize(label, 0, fontScale=tl / 3, thickness=tf)[0]
         c2 = c1[0] + t_size[0], c1[1] - t_size[1] - 3
         cv2.rectangle(img, c1, c2, color, -1, cv2.LINE_AA)  # filled
-        cv2.putText(img, label, (c1[0], c1[1] - 2), 0, tl / 3, [225, 255, 255], thickness=tf, lineType=cv2.LINE_AA)
+        cv2.putText(img, label, (int(x[0]+random.randint(1,5)), int((x[1]+x[3])/2)+random.randint(1,5)), 0, tl / 3, [225, 255, 255], 0, lineType=cv2.LINE_AA)
 
 
 def plot_wh_methods():  # from utils.general import *; plot_wh_methods()
