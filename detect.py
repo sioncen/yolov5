@@ -90,8 +90,9 @@ def detect(save_img=False):
             else:
                 p, s, im0 = Path(path), '', im0s
 
-            nPos=p.name.find('_')
-            strclass=p.name[:nPos].lower()
+            #nPos=p.name.find('_')
+            #strclass=p.name[:nPos].lower()
+            strclass=p.name
             strdis=''
             save_path = str(save_dir / p.name)
             txt_path = str(save_dir / 'labels' / p.stem) + ('_%g' % dataset.frame if dataset.mode == 'video' else '')
@@ -124,7 +125,7 @@ def detect(save_img=False):
 
             # Print time (inference + NMS)
             print('%sDone. (%.3fs)' % (s, t2 - t1))
-            if strclass==strdis:
+            if strdis in strclass:#if strclass==strdis:
               rightdis += 1
               print(" 111")
             else:
