@@ -3,17 +3,17 @@ import os
 import random
 import shutil
 
-rootdir = r'F:\UCMerced_LandUse\IMG'
-trainimg = r'F:\UCMerced_LandUse\images\train'
-valimg = r'F:\UCMerced_LandUse\images\val'
-testimg = r'F:\UCMerced_LandUse\images\test'
-trainlabel = r'F:\UCMerced_LandUse\labels\train'
-valimglabel = r'F:\UCMerced_LandUse\labels\val'
-testimglabel = r'F:\UCMerced_LandUse\labels\test'
-list = os.listdir(rootdir)
-for i in range(0, len(list)):
-    path = os.path.join(rootdir, list[i])
-    pic_path = path + r'\*.tif'
+rootdir = r'/content/yolov5/UCMerced_LandUse/Images'
+trainimg = r'/content/yolov5/ucmdata/images/train'
+valimg = r'/content/yolov5/ucmdata/images/val'
+testimg = r'/content/yolov5/ucmdata/images/test'
+trainlabel = r'/content/yolov5/ucmdata/labels/train'
+valimglabel = r'/content/yolov5/ucmdata/labels/val'
+testimglabel = r'/content/yolov5/ucmdata/labels/test'
+fileslist = os.listdir(rootdir)
+for i in range(0, len(fileslist)):
+    path = os.path.join(rootdir, fileslist[i])
+    pic_path = path + r'/*.tif'
     image_files = glob.glob(pic_path)
     random.shuffle(image_files)
     train_list = image_files[:int(0.8 * len(image_files))]
@@ -27,7 +27,7 @@ for i in range(0, len(list)):
             os.makedirs(trainlabel)
         imgname=os.path.splitext(os.path.basename(listT))[0]
         shutil.copy(listT, trainimg)
-        label_pathT=trainlabel+'\\'+imgname+'.txt'
+        label_pathT=trainlabel+r'/'+imgname+'.txt'
         f = open(label_pathT, 'w')
         f.write(str(i)+' 0.5 0.5 1 1')
     for listT in val_list:
@@ -37,7 +37,7 @@ for i in range(0, len(list)):
             os.makedirs(valimglabel)
         imgname=os.path.splitext(os.path.basename(listT))[0]
         shutil.copy(listT, valimg)
-        label_pathT=valimglabel+'\\'+imgname+'.txt'
+        label_pathT=valimglabel+r'/'+imgname+'.txt'
         f = open(label_pathT, 'w')
         f.write(str(i)+' 0.5 0.5 1 1')
     for listT in test_list:
@@ -47,7 +47,7 @@ for i in range(0, len(list)):
             os.makedirs(testimglabel)
         imgname=os.path.splitext(os.path.basename(listT))[0]
         shutil.copy(listT, testimg)
-        label_pathT=testimglabel+'\\'+imgname+'.txt'
+        label_pathT=testimglabel+r'/'+imgname+'.txt'
         f = open(label_pathT, 'w')
         f.write(str(i)+' 0.5 0.5 1 1')
 
