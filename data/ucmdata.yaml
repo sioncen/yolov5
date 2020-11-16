@@ -18,4 +18,4 @@ test: /content/yolov5/ucmdata/images/test/  # 2000 images
 nc: 21
 
 # class names
-names: ['forest', 'river', 'tenniscourt', 'overpass', 'parkinglot', 'harbor', 'baseballdiamond', 'freeway', 'airplane', 'mediumresidential', 'intersection', 'denseresidential', 'beach', 'sparseresidential', 'golfcourse', 'storagetanks', 'chaparral', 'runway', 'buildings', 'agricultural', 'mobilehomepark']
+['agricultural', 'airplane', 'baseballdiamond', 'beach', 'buildings', 'chaparral', 'denseresidential', 'forest', 'freeway', 'golfcourse', 'harbor', 'intersection', 'mediumresidential', 'mobilehomepark', 'overpass', 'parkinglot', 'river', 'runway', 'sparseresidential', 'storagetanks', 'tenniscourt']
