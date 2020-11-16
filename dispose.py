@@ -11,6 +11,7 @@ trainlabel = r'/content/yolov5/ucmdata/labels/train'
 valimglabel = r'/content/yolov5/ucmdata/labels/val'
 testimglabel = r'/content/yolov5/ucmdata/labels/test'
 fileslist = os.listdir(rootdir)
+fileslist.sort()
 for i in range(0, len(fileslist)):
     path = os.path.join(rootdir, fileslist[i])
     pic_path = path + r'/*.tif'
