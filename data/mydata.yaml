@@ -18,4 +18,4 @@ test: /content/yolov5/mydata/images/test/  # 2000 images
 nc: 6
 
 # class names
-names: ['city', 'desert', 'farmland', 'lake', 'mountain', 'ocean']
+names: ['desert', 'lake', 'city', 'farmland', 'ocean', 'mountain']
