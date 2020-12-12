@@ -13,14 +13,13 @@ trainimg = r'/content/yolov5/mydata/images/train'
 valimg = r'/content/yolov5/mydata/images/val'
 trainlabel = r'/content/yolov5/mydata/labels/train'
 valimglabel = r'/content/yolov5/mydata/labels/val'
-listfile = os.listdir(rootdir)
+listfile = ['city', 'desert', 'farmland', 'lake', 'mountain', 'ocean']
 rootdir2 = r'/content/yolov5/all/test'
-listfile2 = os.listdir(rootdir2)
 testimg = r'/content/yolov5/mydata/images/test'
-for i in range(0, len(listfile2)):
+for i in range(0, len(listfile)):
     if not os.path.exists(testimg):
         os.makedirs(testimg)
-    path = os.path.join(rootdir2, listfile2[i])
+    path = os.path.join(rootdir2, listfile[i])
     pic_path = path + r'/*.jpg'
     image_files = glob.glob(pic_path)
     print(i,len(image_files))
@@ -40,75 +39,75 @@ for i in range(0, len(listfile)):
     train_list = image_files[:tlen]
     val_list = image_files[tlen:]  # math.ceil(0.8 * len(image_files)):
 
-    # for listT in train_list:
-    #     img = Image.open(listT)
-    #     # plt.figure(figsize=(6, 6))
-    #     img2 = img.transpose(Image.ROTATE_90)
-    #     img3 = img.transpose(Image.ROTATE_180)
-    #     img4 = img.transpose(Image.ROTATE_270)
-
-    #     # 水平翻转
-    #     img50 = cv2.cvtColor(numpy.asarray(img), cv2.COLOR_RGB2BGR)
-    #     img51 = cv2.flip(img50, 1)
-    #     img5 = Image.fromarray(cv2.cvtColor(img51, cv2.COLOR_BGR2RGB))
-    #     img6 = img5.transpose(Image.ROTATE_90)
-    #     img7 = img5.transpose(Image.ROTATE_180)
-    #     img8 = img5.transpose(Image.ROTATE_270)
-    #     # 垂直翻转
-    #     img90 = cv2.cvtColor(numpy.asarray(img), cv2.COLOR_RGB2BGR)
-    #     img91 = cv2.flip(img90, 0)
-    #     img9 = Image.fromarray(cv2.cvtColor(img91, cv2.COLOR_BGR2RGB))
-    #     img10 = img9.transpose(Image.ROTATE_90)
-    #     img11 = img9.transpose(Image.ROTATE_180)
-    #     img12 = img9.transpose(Image.ROTATE_270)
-    #     # 水平加垂直翻转
-    #     img30 = cv2.cvtColor(numpy.asarray(img), cv2.COLOR_RGB2BGR)
-    #     img31 = cv2.flip(img30, -1)
-    #     img13 = Image.fromarray(cv2.cvtColor(img31, cv2.COLOR_BGR2RGB))
-    #     img14 = img13.transpose(Image.ROTATE_90)
-    #     img15 = img13.transpose(Image.ROTATE_180)
-    #     img16 = img13.transpose(Image.ROTATE_270)
-
-    #     imglist = []
-    #     imglist.append(img)
-    #     imglist.append(img2)
-    #     imglist.append(img3)
-    #     imglist.append(img4)
-    #     imglist.append(img5)
-    #     imglist.append(img6)
-    #     imglist.append(img7)
-    #     imglist.append(img8)
-    #     imglist.append(img9)
-    #     imglist.append(img10)
-    #     imglist.append(img11)
-    #     imglist.append(img12)
-    #     imglist.append(img13)
-    #     imglist.append(img14)
-    #     imglist.append(img15)
-    #     imglist.append(img16)
-
-    #     if not os.path.exists(trainimg):
-    #         os.makedirs(trainimg)
-    #     if not os.path.exists(trainlabel):
-    #         os.makedirs(trainlabel)
-    #     imgname = os.path.splitext(os.path.basename(listT))[0]
-    #     for index, imgT in enumerate(imglist):
-    #         a1 = cv2.cvtColor(numpy.asarray(imgT), cv2.COLOR_RGB2BGR)
-    #         nameT = trainimg + str('/') + imgname + str('_') + str(index) + '.jpg'
-    #         cv2.imwrite(nameT, a1)
-    #         label_pathT = trainlabel + '/' + imgname + str('_') + str(index) + '.txt'
-    #         f = open(label_pathT, 'w')
-    #         f.write(str(i) + ' 0.5 0.5 1 1')
     for listT in train_list:
+        img = Image.open(listT)
+        # plt.figure(figsize=(6, 6))
+        img2 = img.transpose(Image.ROTATE_90)
+        img3 = img.transpose(Image.ROTATE_180)
+        img4 = img.transpose(Image.ROTATE_270)
+
+        # 水平翻转
+        img50 = cv2.cvtColor(numpy.asarray(img), cv2.COLOR_RGB2BGR)
+        img51 = cv2.flip(img50, 1)
+        img5 = Image.fromarray(cv2.cvtColor(img51, cv2.COLOR_BGR2RGB))
+        img6 = img5.transpose(Image.ROTATE_90)
+        img7 = img5.transpose(Image.ROTATE_180)
+        img8 = img5.transpose(Image.ROTATE_270)
+        # 垂直翻转
+        img90 = cv2.cvtColor(numpy.asarray(img), cv2.COLOR_RGB2BGR)
+        img91 = cv2.flip(img90, 0)
+        img9 = Image.fromarray(cv2.cvtColor(img91, cv2.COLOR_BGR2RGB))
+        img10 = img9.transpose(Image.ROTATE_90)
+        img11 = img9.transpose(Image.ROTATE_180)
+        img12 = img9.transpose(Image.ROTATE_270)
+        # 水平加垂直翻转
+        img30 = cv2.cvtColor(numpy.asarray(img), cv2.COLOR_RGB2BGR)
+        img31 = cv2.flip(img30, -1)
+        img13 = Image.fromarray(cv2.cvtColor(img31, cv2.COLOR_BGR2RGB))
+        img14 = img13.transpose(Image.ROTATE_90)
+        img15 = img13.transpose(Image.ROTATE_180)
+        img16 = img13.transpose(Image.ROTATE_270)
+
+        imglist = []
+        imglist.append(img)
+        imglist.append(img2)
+        imglist.append(img3)
+        imglist.append(img4)
+        imglist.append(img5)
+        imglist.append(img6)
+        imglist.append(img7)
+        imglist.append(img8)
+        imglist.append(img9)
+        imglist.append(img10)
+        imglist.append(img11)
+        imglist.append(img12)
+        imglist.append(img13)
+        imglist.append(img14)
+        imglist.append(img15)
+        imglist.append(img16)
+
         if not os.path.exists(trainimg):
             os.makedirs(trainimg)
         if not os.path.exists(trainlabel):
             os.makedirs(trainlabel)
-        imgname=os.path.splitext(os.path.basename(listT))[0]
-        shutil.copy(listT, trainimg)
-        label_pathT=trainlabel+'/'+imgname+'.txt'
-        f = open(label_pathT, 'w')
-        f.write(str(i)+' 0.5 0.5 1 1')
+        imgname = os.path.splitext(os.path.basename(listT))[0]
+        for index, imgT in enumerate(imglist):
+            a1 = cv2.cvtColor(numpy.asarray(imgT), cv2.COLOR_RGB2BGR)
+            nameT = trainimg + str('/') + imgname + str('_') + str(index) + '.jpg'
+            cv2.imwrite(nameT, a1)
+            label_pathT = trainlabel + '/' + imgname + str('_') + str(index) + '.txt'
+            f = open(label_pathT, 'w')
+            f.write(str(i) + ' 0.5 0.5 1 1')
+    # for listT in train_list:
+    #     if not os.path.exists(trainimg):
+    #         os.makedirs(trainimg)
+    #     if not os.path.exists(trainlabel):
+    #         os.makedirs(trainlabel)
+    #     imgname=os.path.splitext(os.path.basename(listT))[0]
+    #     shutil.copy(listT, trainimg)
+    #     label_pathT=trainlabel+'/'+imgname+'.txt'
+    #     f = open(label_pathT, 'w')
+    #     f.write(str(i)+' 0.5 0.5 1 1')
     for listT in val_list:
         if not os.path.exists(valimg):
             os.makedirs(valimg)
