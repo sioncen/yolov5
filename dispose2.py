@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 from PIL import Image
 import numpy
 import math
+import imgaug.augmenters as iaa
+import random
 
 rootdir = r'/content/yolov5/all/train'
 trainimg = r'/content/yolov5/mydata/images/train'
@@ -94,6 +96,28 @@ for i in range(0, len(listfile)):
         for index, imgT in enumerate(imglist):
             a1 = cv2.cvtColor(numpy.asarray(imgT), cv2.COLOR_RGB2BGR)
             nameT = trainimg + str('/') + imgname + str('_') + str(index) + '.jpg'
+            #数据增强
+            randp = random.random()
+            if randp < 0.125:
+                seq = iaa.Sequential([
+                    iaa.ChannelShuffle(0.35)
+                ])
+                a1 = seq(image=a1)
+            elif randp < 0.25:
+                seq = iaa.Sequential([
+                    iaa.SaltAndPepper(0.1)
+                ])
+                a1 = seq(image=a1)
+            elif randp < 0.375:
+                seq = iaa.Sequential([
+                    iaa.Dropout(p=(0, 0.2))
+                ])
+                a1 = seq(image=a1)
+            elif randp < 0.5:
+                seq = iaa.Sequential([
+                    iaa.GammaContrast((0.5, 2.0))
+                ])
+                a1 = seq(image=a1)
             cv2.imwrite(nameT, a1)
             label_pathT = trainlabel + '/' + imgname + str('_') + str(index) + '.txt'
             f = open(label_pathT, 'w')
