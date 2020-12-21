@@ -98,22 +98,22 @@ for i in range(0, len(listfile)):
             nameT = trainimg + str('/') + imgname + str('_') + str(index) + '.jpg'
             #数据增强
             randp = random.random()
-            if randp < 0.125:
+            if randp < 0.15:
                 seq = iaa.Sequential([
                     iaa.ChannelShuffle(0.35)
                 ])
                 a1 = seq(image=a1)
-            elif randp < 0.25:
+            elif randp < 0.3:
                 seq = iaa.Sequential([
                     iaa.SaltAndPepper(0.1)
                 ])
                 a1 = seq(image=a1)
-            elif randp < 0.375:
+            elif randp < 0.45:
                 seq = iaa.Sequential([
                     iaa.Dropout(p=(0, 0.2))
                 ])
                 a1 = seq(image=a1)
-            elif randp < 0.5:
+            elif randp < 0.6:
                 seq = iaa.Sequential([
                     iaa.GammaContrast((0.5, 2.0))
                 ])
